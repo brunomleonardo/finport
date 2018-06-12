@@ -1,0 +1,9 @@
+.mtop-20 {
+    margin-top:20px;
+}
+
+.ticker-info:hover{
+    opacity: 0.8;
+    cursor: pointer;
+    border: 1px solid blue;
+}
