@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AddNewTickerComponent } from './add-new-ticker/add-new-ticker.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { SearchTickerComponent } from './search-ticker/search-ticker.component';
 
 const routes = [
   { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
-  { path: 'newticker', component: AddNewTickerComponent },
+  { path: 'newticker', component: SearchTickerComponent },
   { path: 'dashboard', component: DashboardComponent }
 ]
 

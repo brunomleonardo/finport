@@ -13,27 +13,31 @@
   </div>
   <div class="col-md-12 mtop-20">
     <div class="row">
-      <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 grid-margin stretch-card" *ngFor="let ticker of tickers$ | async">
-        <div class="card card-statistics ticker-info" (click)="setTicker(ticker)">
-          <div class="card-body">
-            <div class="clearfix">
-              <div class="float-left">
-                {{ ticker.company }}
-                <i class="mdi mdi-cube text-danger icon-lg"></i>
-              </div>
-              <div class="float-right">
-                <p class="mb-0 text-right">Price</p>
-                <div class="fluid-container">
-                  <h3 class="font-weight-medium text-right mb-0">{{ ticker.price | currency }}</h3>
+      <!-- <div infiniteScroll [infiniteScrollDistance]="1" [infiniteScrollThrottle]="50" (scrolled)="onScroll()" [scrollWindow]="false"> -->
+        <div class="col-xl-2 col-lg-2 col-md-2 col-sm-6 grid-margin stretch-card" *ngFor="let ticker of tickers$ | async">
+          <div class="card card-statistics ticker-info" (click)="setTicker(ticker)">
+            <div class="card-body">
+              <div class="clearfix">
+                <div class="float-left">
+                  <h3>{{ticker.abbv}}</h3>
+                  <h5 class="italic">{{ ticker.company }}</h5>
+                  <i class="mdi mdi-cube text-danger icon-lg"></i>
+                </div>
+                <div class="float-right">
+                  <p class="mb-0 text-right">Price</p>
+                  <div class="fluid-container">
+                    <h3 class="font-weight-medium text-right mb-0">{{ ticker.current_price | currency }}</h3>
+                  </div>
                 </div>
               </div>
+              <p class="text-muted mt-3 mb-0">
+                <i class="mdi mdi-alert-octagon mr-1" aria-hidden="true"></i> 65% lower growth
+              </p>
             </div>
-            <p class="text-muted mt-3 mb-0">
-              <i class="mdi mdi-alert-octagon mr-1" aria-hidden="true"></i> 65% lower growth
-            </p>
           </div>
         </div>
       </div>
-    </div>
+    <!-- </div> -->
   </div>
 </div>
+<app-add-new-ticker [ticker]="ticker"></app-add-new-ticker>

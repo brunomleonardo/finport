@@ -8,6 +8,8 @@ import { DtoTicker } from '../models/ticker';
 const httpOptions = {
   headers: new HttpHeaders(
     {
+      // 'Access-Control-Allow-Origin': '*',
+      // 'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept, Authorization',
       'Content-Type': 'application/json',
     }
   )
@@ -20,8 +22,7 @@ const httpOptions = {
 export class TickerService {
 
   private searchTickerUrl = 'http://localhost:49495/api/ticker'
-
-  ticker: DtoTicker;
+  private tickerNodeUrl = 'http://localhost:3000/api/tickers'
 
   constructor(
     private httpClient: HttpClient,
@@ -30,15 +31,21 @@ export class TickerService {
 
   searchTickers(term: string): Observable<DtoTicker[]> {
     if (!term.trim()) return of([]);
-    return this.httpClient.get<DtoTicker[]>(`${this.searchTickerUrl}/?ticker=${term}`).
+    return this.httpClient.get<DtoTicker[]>(`${this.tickerNodeUrl}/${term}`).
       pipe(
         tap(_ => this.serviceModule.log('shit')),
         catchError(this.serviceModule.handleError<DtoTicker[]>('searchTickers', []))
       );
   }
 
-  getTicker(): Observable<DtoTicker> {
-    return of(this.ticker);
+  loadTickers(): void {
+    console.log("here service");
+    this.httpClient.get('http://localhost:3000/api/loadtickers', { headers: httpOptions.headers }).subscribe(response => {
+      console.log(response);
+    },
+      err => {
+        console.log('Unable to load all tickers', err);
+      });
   }
 
 }

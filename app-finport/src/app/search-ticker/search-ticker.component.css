@@ -5,5 +5,9 @@
 .ticker-info:hover{
     opacity: 0.8;
     cursor: pointer;
-    border: 1px solid blue;
 }
+
+.italic{
+    font-style: italic;
+}
+

@@ -1,7 +1,10 @@
 
 export class DtoTicker {
-    symbol: string;
+    abbv: string;
     company: string;
-    price: number;
-    prev_price: number;
+    current_price: number;
+    sector: string;
+    industry: string;
+    market_cap: string;
+    href: number;
 }

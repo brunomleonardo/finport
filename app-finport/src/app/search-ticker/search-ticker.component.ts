@@ -17,19 +17,12 @@ export class SearchTickerComponent implements OnInit {
 
   tickers$: Observable<DtoTicker[]>;
   private searchTerms = new Subject<string>();
+  ticker: DtoTicker;
+  offset: Number;
 
   constructor(
     private tickerService: TickerService
   ) { }
-
-  search(term: string): void {
-    this.searchTerms.next(term);
-  }
-
-  setTicker(ticker: DtoTicker){
-    this.tickerService.getTicker().subscribe(ticker => this.tickerService.ticker = ticker);
-    // this.tickerService.ticker = ticker;
-  }
 
   ngOnInit() {
     this.tickers$ = this.searchTerms.pipe(
@@ -37,6 +30,18 @@ export class SearchTickerComponent implements OnInit {
       distinctUntilChanged(),
       switchMap((term: string) => this.tickerService.searchTickers(term))
     );
+  }
+
+  search(term: string): void {
+    this.searchTerms.next(term);
+  }
+
+  setTicker(ticker: DtoTicker) {
+    this.ticker = ticker;
+  }
+
+  onScroll(): void {
+    console.log("scrolled!!");
   }
 
 }

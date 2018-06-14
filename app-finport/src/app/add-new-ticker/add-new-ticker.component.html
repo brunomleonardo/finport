@@ -1,17 +1,16 @@
-<app-search-ticker></app-search-ticker>
-<div class="row">
-    <!-- *ngIf="ticker"> -->
+<div class="row" *ngIf="ticker">
   <div class="col-12">
     <div class="card">
       <div class="card-body">
         <h4 class="card-title">{{ ticker.company }}</h4>
         <p class="card-description">
-          Purchase Details
+          Purchase Details -
+          <b>{{ ticker.abbv }}</b>
         </p>
         <form class="forms-sample">
           <div class="form-group">
             <label for="exampleInputEmail1">Price</label>
-            <input type="text" class="form-control" id="exampleInputEmail1" value="{{ ticker.price | currency }}" disabled>
+            <input type="text" class="form-control" id="exampleInputEmail1" value="{{ ticker.current_price | currency }}" disabled>
           </div>
           <div class="form-group">
             <label for="exampleInputPassword1">Password</label>

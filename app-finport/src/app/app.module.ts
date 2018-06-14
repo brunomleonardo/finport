@@ -10,6 +10,7 @@ import { AddNewTickerComponent } from './add-new-ticker/add-new-ticker.component
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { AppRoutingModule } from './/app-routing.module';
 import { SearchTickerComponent } from './search-ticker/search-ticker.component';
+import { InfiniteScrollModule  } from "ngx-infinite-scroll";
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { SearchTickerComponent } from './search-ticker/search-ticker.component';
     FormsModule,
     AppRoutingModule,
     HttpClientModule,
+    InfiniteScrollModule
   ],
   providers: [],
   bootstrap: [AppComponent]

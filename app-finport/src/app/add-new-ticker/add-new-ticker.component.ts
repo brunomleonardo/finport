@@ -11,7 +11,8 @@ export class AddNewTickerComponent implements OnInit {
 
   constructor(private tickerService: TickerService) { }
 
-  ticker: DtoTicker = this.tickerService.ticker;
+  @Input()
+  ticker: DtoTicker;
 
   ngOnInit() {
   }

@@ -17,16 +17,12 @@ const httpOptions = {
 })
 
 export class ServicesModule {
-  
-  // private heroesUrl = 'api/heroes';
 
   constructor(
-    // private httpClient: HttpClient
   ) { }
 
   log(message: string) {
-    //this.messageService.add('HeroService: ' + message);
-    //log to file or DB
+    console.log('Log fun:' + message);
   };
 
   handleError<T>(operation = 'operation', result?: T) {
