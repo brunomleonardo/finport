@@ -10,11 +10,7 @@ import { TickerService } from '../services/ticker.service';
 
 export class LeftMenuComponent implements OnInit {
 
-  private dtoUser: DtoUser = {
-    id: 13,
-    name: 'Miguel Oliveira',
-    strategy: 'Part-T Trader'
-  };
+  dtoUser: DtoUser;
 
   constructor(private tickerService: TickerService) { }
 

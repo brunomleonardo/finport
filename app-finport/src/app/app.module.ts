@@ -11,6 +11,10 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { AppRoutingModule } from './/app-routing.module';
 import { SearchTickerComponent } from './search-ticker/search-ticker.component';
 import { InfiniteScrollModule  } from "ngx-infinite-scroll";
+import { NewsComponent } from './news/news.component';
+import { FeedCardComponent } from './feed-card/feed-card.component';
+import { UserComponent } from './user/user.component';
+import { EmailValidatorComponent } from './custom-validators/email-validator/email-validator.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +23,11 @@ import { InfiniteScrollModule  } from "ngx-infinite-scroll";
     LeftMenuComponent,
     AddNewTickerComponent,
     DashboardComponent,
-    SearchTickerComponent
+    SearchTickerComponent,
+    NewsComponent,
+    FeedCardComponent,
+    UserComponent,
+    EmailValidatorComponent
   ],
   imports: [
     BrowserModule,

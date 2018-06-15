@@ -1,0 +1,8 @@
+.navbar.default-layout .navbar-brand-wrapper .navbar-brand {
+    background: #fefefe;
+}
+
+.navbar.default-layout .navbar-brand-wrapper .navbar-brand img {
+    width:60%; 
+    height: initial;
+}

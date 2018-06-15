@@ -1,0 +1,19 @@
+<div *ngIf="!newsUrl" class="card card-statistics news-info" (click)="goToNewsPage()">
+  <div class="card-body">
+    <div class="clearfix">
+      <div class="float-left">
+        <h3>{{feed.title}}</h3>
+        <h5 class="italic">{{feed.description}}</h5>
+        <i class="mdi mdi-cube text-danger icon-lg"></i>
+      </div>
+      <div class="float-right">
+        <div class="fluid-container">
+          <h3 class="font-weight-medium text-right mb-0">{{feed.author}}</h3>
+        </div>
+      </div>
+    </div>
+    <p class="text-muted mt-3 mb-0">
+      <i class="mdi mdi-alert-octagon mr-1" aria-hidden="true"></i> {{feed.pubDate | date:'dd-MM-yyyy'}}
+    </p>
+  </div>
+</div>

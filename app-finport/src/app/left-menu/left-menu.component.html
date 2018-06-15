@@ -7,9 +7,9 @@
                 <img src="../assets/images/faces/face1.jpg" alt="profile image">
               </div>
               <div class="text-wrapper">
-                <p class="profile-name">{{ dtoUser.name }}</p>
+                <p class="profile-name">{{ dtoUser.first_name }}</p>
                 <div>
-                  <small class="designation text-muted">{{ dtoUser.strategy }}</small>
+                  <small class="designation text-muted">{{ dtoUser.last_name }}</small>
                   <span class="status-indicator online"></span>
                 </div>
               </div>
@@ -29,6 +29,18 @@
           </a>
         </li>
         <li class="nav-item">
+          <a routerLink="/news" class="nav-link">
+            <i class="menu-icon mdi mdi-television"></i>
+            <span class="menu-title">News</span>
+          </a>
+        </li>
+        <li class="nav-item">
+            <a routerLink="/registeruser" class="nav-link">
+              <i class="menu-icon mdi mdi-television"></i>
+              <span class="menu-title">User Register</span>
+            </a>
+          </li>
+        <!-- <li class="nav-item">
           <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
             <i class="menu-icon mdi mdi-content-copy"></i>
             <span class="menu-title">Basic UI Elements</span>
@@ -94,6 +106,6 @@
               </li>
             </ul>
           </div>
-        </li>
+        </li> -->
       </ul>
     </nav>
