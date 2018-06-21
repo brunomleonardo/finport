@@ -7,16 +7,84 @@
           Purchase Details -
           <b>{{ ticker.abbv }}</b>
         </p>
-        <form class="forms-sample">
-          <div class="form-group">
-            <label for="exampleInputEmail1">Price</label>
-            <input type="text" class="form-control" id="exampleInputEmail1" value="{{ ticker.current_price | currency }}" disabled>
+        <form #addTickerForm="ngForm" class="forms-sample" (ngSubmit)="onSubmitForm(addTickerForm)">
+          <input type="hidden" name="_id" value="{{ ticker._id }}" />
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="inpPrice">Price</label>
+                <input type="text" class="form-control" id="inpPrice" value="{{ ticker.current_price | currency }}" disabled>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="inpBuyPrice">Buy Price</label>
+                <input type="number" class="form-control" id="inpBuyPrice" #buyPrice="ngModel" (keypress)="updateTotals()" name="buyPrice"
+                  [(ngModel)]="operationHistory.buyPrice" placeholder="Buy Price" required>
+              </div>
+              <div role="alert" *ngIf="buyPrice.invalid && (buyPrice.dirty || buyPrice.touched)" class="alert alter-danger">
+                <div *ngIf="buyPrice.errors.required">
+                  Buy Price is required.
+                </div>
+                <!-- <div *ngIf="buyPrice <= 0">
+                  Buy Price must be greather than 0.
+                </div> -->
+              </div>
+            </div>
           </div>
-          <div class="form-group">
-            <label for="exampleInputPassword1">Password</label>
-            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="inpConvValue">Conversion Value ({{ ticker.currency}})</label>
+                <input type="number" (keypress)="updateTotals()" class="form-control" id="inpConvValue" #conversionUSD="ngModel" name="conversionUSD"
+                  [(ngModel)]="operationHistory.conversionUSD" required placeholder="USD">
+              </div>
+              <div role="alert" *ngIf="conversionUSD.invalid && (conversionUSD.dirty || conversionUSD.touched)" class="alert alter-danger">
+                <div *ngIf="conversionUSD.errors.required">
+                  ConversionUSD is required.
+                </div>
+                <!-- <div *ngIf="conversionUSD <= 0">
+                  ConversionUSD must be greather than 0.
+                </div> -->
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="inpAmount">Amount</label>
+                <input type="number" (keypress)="updateTotals()" class="form-control" id="inpAmount" name="amount" #amount="ngModel" [(ngModel)]="operationHistory.amount"
+                  placeholder="Amount" required>
+              </div>
+              <div role="alert" *ngIf="amount.invalid && (amount.dirty || amount.touched)" class="alert alter-danger">
+                <div *ngIf="amount.errors.required">
+                  Amount is required.
+                </div>
+                <!-- <div *ngIf="amount <= 0">
+                  Amount must be greather than 0.
+                </div> -->
+              </div>
+            </div>
           </div>
-          <button type="submit" class="btn btn-success mr-2">Submit</button>
+          <div class="row">
+            <div class="col-md-6"></div>
+            <div class="col-md-6">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="inptotalConverted">Total {{ticker.currency}}</label>
+                    <input type="text" class="form-control" id="inptotalConverted" #totalConverted="ngModel" name="totalConverted" [(ngModel)]="operationHistory.totalConverted" value="{{ operationHistory.totalConverted | currency }}" readonly>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="inpTotal">Total</label>
+                    <input type="text" class="form-control" id="inpTotal" #total="ngModel" name="total" [(ngModel)]="operationHistory.total" value="{{ operationHistory.total | currency:'EUR' }}" readonly>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- [disabled]="!addTickerForm.valid" -->
+          <button  type="submit" class="btn btn-success mr-2">Submit</button>
           <button class="btn btn-light">Cancel</button>
         </form>
       </div>

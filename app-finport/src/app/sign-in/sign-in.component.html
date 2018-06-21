@@ -1,0 +1,32 @@
+<div class="row">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">Login</h4>
+        <p class="card-description">
+          <b></b> 
+        </p>
+        <div *ngIf="isLoginError" class="red-text center error-message">
+          <i class="material-icons">error</i> Incorrect username or password
+        </div>
+        <form #userLoginForm="ngForm" (ngSubmit)="onSubmitForm(userLoginForm)">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label data-error="Required field!">UserName</label>
+                <input class="form-control" type="text" name="username" #UserName="ngModel" [(ngModel)]="username" required>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label [attr.data-error]="Password.errors!=null?(Password.errors.required?'Required field!':'Minimum 3 characters needed'):''">Password</label>
+                <input type="password" class="form-control" name="password" #Password="ngModel" [(ngModel)]="password" required minlength="3">
+              </div>
+            </div>
+          </div>
+          <button [disabled]="!userLoginForm.valid" class="btn btn-success mr-2" type="submit">Login</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

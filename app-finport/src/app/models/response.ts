@@ -1,5 +1,6 @@
-export class Response {
-    error: Boolean;
-    message: String;
-    object?: any;
+export class ResponseDto {
+    success: Boolean;
+    msg: string;
+    access_token: string;
+    obj?: any;
 }

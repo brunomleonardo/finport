@@ -38,6 +38,7 @@ export class SearchTickerComponent implements OnInit {
 
   setTicker(ticker: DtoTicker) {
     this.ticker = ticker;
+    this.searchTerms = new Subject<string>();
   }
 
   onScroll(): void {

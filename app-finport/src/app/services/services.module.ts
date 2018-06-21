@@ -4,14 +4,6 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { catchError, map, tap } from 'rxjs/operators';
 
-const httpOptions = {
-  headers: new HttpHeaders(
-    {
-      'Content-Type': 'application/json',
-    }
-  )
-};
-
 @Injectable({
   providedIn: 'root'
 })
@@ -20,6 +12,25 @@ export class ServicesModule {
 
   constructor(
   ) { }
+
+  httpOptions_loggedIn = {
+    headers: new HttpHeaders(
+      {
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+        'Authorization': localStorage.getItem('jwtToken')
+      }
+    )
+  };
+
+  httpOptions_signUp = {
+    headers: new HttpHeaders(
+      {
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Headers': 'Content-Type',
+      }
+    )
+  };
 
   log(message: string) {
     console.log('Log fun:' + message);

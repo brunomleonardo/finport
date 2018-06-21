@@ -1,46 +1,51 @@
-<nav class="sidebar sidebar-offcanvas" id="sidebar">
-      <ul class="nav">
-        <li class="nav-item nav-profile">
-          <div class="nav-link">
-            <div class="user-wrapper">
-              <div class="profile-image">
-                <img src="../assets/images/faces/face1.jpg" alt="profile image">
-              </div>
-              <div class="text-wrapper">
-                <p class="profile-name">{{ dtoUser.first_name }}</p>
-                <div>
-                  <small class="designation text-muted">{{ dtoUser.last_name }}</small>
-                  <span class="status-indicator online"></span>
-                </div>
-              </div>
-            </div>
-            <a routerLink="/newticker" class="btn btn-success btn-block">
-              New Ticker
-            </a>
-            <button (click)="loadTickers()" class="btn btn-success btn-block">
-              Load Tickers
-            </button>
+<nav class="sidebar sidebar-offcanvas" id="sidebar" *ngIf="loggedIn">
+  <ul class="nav">
+    <li class="nav-item nav-profile">
+      <div class="nav-link">
+        <div class="user-wrapper">
+          <!-- <div class="profile-image">
+            <img src="../assets/images/faces/face1.jpg" alt="profile image">
+          </div> -->
+          <div class="text-wrapper">
+            <p class="profile-name">{{ userName }}</p>
           </div>
-        </li>
-        <li class="nav-item">
-          <a routerLink="/dashboard" class="nav-link">
-            <i class="menu-icon mdi mdi-television"></i>
-            <span class="menu-title">Dashboard</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a routerLink="/news" class="nav-link">
-            <i class="menu-icon mdi mdi-television"></i>
-            <span class="menu-title">News</span>
-          </a>
-        </li>
-        <li class="nav-item">
-            <a routerLink="/registeruser" class="nav-link">
-              <i class="menu-icon mdi mdi-television"></i>
-              <span class="menu-title">User Register</span>
-            </a>
-          </li>
-        <!-- <li class="nav-item">
+        </div>
+        <a routerLink="/newticker" class="btn btn-success btn-block">
+          New Ticker
+        </a>
+        <button (click)="logout()" class="btn btn-success btn-block">
+          Logout
+        </button>
+        <button (click)="loadTickers()" class="btn btn-success btn-block">
+          Load Tickers
+        </button>
+      </div>
+    </li>
+    <li class="nav-item">
+      <a routerLink="/dashboard" class="nav-link">
+        <i class="menu-icon mdi mdi-television"></i>
+        <span class="menu-title">Dashboard</span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a routerLink="/news" class="nav-link">
+        <i class="menu-icon mdi mdi-television"></i>
+        <span class="menu-title">News</span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a routerLink="/registeruser" class="nav-link">
+        <i class="menu-icon mdi mdi-television"></i>
+        <span class="menu-title">User Register</span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a routerLink="/signin" class="nav-link">
+        <i class="menu-icon mdi mdi-television"></i>
+        <span class="menu-title">Login</span>
+      </a>
+    </li>
+    <!-- <li class="nav-item">
           <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
             <i class="menu-icon mdi mdi-content-copy"></i>
             <span class="menu-title">Basic UI Elements</span>
@@ -107,5 +112,5 @@
             </ul>
           </div>
         </li> -->
-      </ul>
-    </nav>
+  </ul>
+</nav>

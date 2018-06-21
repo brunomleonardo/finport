@@ -1,0 +1,60 @@
+<div class="row">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">User Registration</h4>
+        <p class="card-description">
+          <b>Details</b>
+        </p>
+        <form #userRegistrationForm="ngForm" (ngSubmit)="onSubmitForm(userRegistrationForm)">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label data-error="Required field!">UserName</label>
+                <input class="form-control" type="text" name="username" #UserName="ngModel" [(ngModel)]="user.username" required>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label [attr.data-error]="Password.errors!=null?(Password.errors.required?'Required field!':'Minimum 3 characters needed'):''">Password</label>
+                <input type="password" class="form-control" name="password" #Password="ngModel" [(ngModel)]="user.password" required minlength="3">
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label data-error="Invalid email!">Email</label>
+                <input class="form-control" type="text" name="email" #Email="ngModel" [(ngModel)]="user.email" [pattern]="emailPattern">
+              </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                  <label 
+                  [attr.data-error]="PasswordConfirmation.errors != null 
+                    ? (PasswordConfirmation.errors.required 
+                              ? 'Required field!' : (Password != PasswordConfirmation ? 'Password doesnt match' : '')):''">Password Confirmation</label>
+                  <input type="password" class="form-control" name="password_confirmation" #PasswordConfirmation="ngModel" [(ngModel)]="user.password_confirmation" required minlength="3">
+                </div>
+              </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>First Name</label>
+                <input class="form-control" type="text" name="first_name" #FirstName="ngModel" [(ngModel)]="user.first_name">
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Last Name</label>
+                <input class="form-control" type="text" name="last_name" #LastName="ngModel" [(ngModel)]="user.last_name">
+              </div>
+            </div>
+          </div>
+          <button [disabled]="!userRegistrationForm.valid" class="btn btn-success mr-2" type="submit">Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

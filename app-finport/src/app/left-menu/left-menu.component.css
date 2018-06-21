@@ -1,3 +1,15 @@
 .sidebar {
     background: #fdfdfd;
 }
+
+.nav li:hover {
+    cursor:pointer;
+}
+
+.sidebar .nav .nav-item.nav-profile .nav-link .user-wrapper .text-wrapper {
+    margin-left: 0px;
+   
+}
+.profile-name {
+    font-size: 16px;
+}
