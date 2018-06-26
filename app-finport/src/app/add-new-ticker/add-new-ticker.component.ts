@@ -5,6 +5,7 @@ import { NgForm } from '@angular/forms';
 import { DtoOperationHistory } from '../models/operationHistory';
 import { ResponseDto } from '../models/response';
 import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-new-ticker',
@@ -15,6 +16,7 @@ export class AddNewTickerComponent implements OnInit {
 
   constructor(
     private tickerService: TickerService,
+    private router: Router,
     private toastr: ToastrService) { }
 
   @Input()
@@ -28,14 +30,19 @@ export class AddNewTickerComponent implements OnInit {
 
   onSubmitForm(form: NgForm) {
     console.log(form.value);
-    this.tickerService.addTicker(form.value, this.ticker._id)
+    this.tickerService.addTicker(form.value, this.ticker.id)
       .subscribe(
-        (data: ResponseDto) => {
-          if (data.success) {
-            this.toastr.success(data.msg);
+        (data: ResponseDto<any>) => {
+          if (data.status) {
+            this.toastr.success(data.message, "Operation", {
+              timeOut: 1500
+            });
           } else {
-            this.toastr.error(data.msg);
+            this.toastr.error(data.message, "Operation", {
+              timeOut: 1500,
+            });
           }
+          this.ticker = null;
         }
       );
   }

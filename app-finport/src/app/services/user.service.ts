@@ -30,14 +30,11 @@ export class UserService {
       last_name: user.last_name,
       password_confirmation: user.password_confirmation
     };
-    return this.httpClient.post(API_CONSTANTS.API_SIGN_UP, body, { headers: this.serviceModule.httpOptions_signUp.headers });
-    // .pipe(
-    //   map((res : ResponseDto) => {
-    //     console.log(res);
-    //   }),
-    //   tap(_ => this.serviceModule.log('Logging on register user')),
-    //   catchError(this.serviceModule.handleError<ResponseDto>('registerUser'))
-    // );
+    return this.httpClient.post(API_CONSTANTS.API_SIGN_UP, body, { headers: this.serviceModule.httpOptions_signUp.headers })
+      .pipe(
+        tap(_ => this.serviceModule.log('Logging on register user')),
+        catchError(this.serviceModule.handleError<any>('registerUser'))
+      );
   }
 
   loginUser(username: String, password: String): Observable<any> {

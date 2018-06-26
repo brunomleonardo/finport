@@ -18,7 +18,7 @@ export class ServicesModule {
       {
         'Access-Control-Allow-Origin': '*',
         'Access-Control-Allow-Headers': 'Content-Type, Authorization',
-        'Authorization': localStorage.getItem('jwtToken')
+        'Authorization': "Bearer " + localStorage.getItem('jwtToken')
       }
     )
   };
@@ -38,6 +38,7 @@ export class ServicesModule {
 
   handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
+      console.log('aqui error');
       console.error(error);
       this.log(`${operation} failed: ${error.message}`);
       return of(result as T);

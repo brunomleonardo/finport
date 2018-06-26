@@ -5,6 +5,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { ResponseDto } from '../models/response';
 import { ToastrService } from 'ngx-toastr';
+import { DtoUser } from '../models/user';
 
 @Component({
   selector: 'app-sign-in',
@@ -31,17 +32,18 @@ export class SignInComponent implements OnInit {
     console.log(localStorage);
     this.userService.loginUser(form.value.username, form.value.password)
       .subscribe(
-        (data: ResponseDto) => {
-          if (data.success) {
-            this.toastr.success(data.msg);
-            localStorage.setItem('jwtToken', data.access_token);
-            localStorage.setItem('username', data.obj.first_name + " " + data.obj.last_name);
-            localStorage.setItem('userId', data.obj._id);
+        (data: ResponseDto<DtoUser>) => {
+          console.log(data);
+          if (data.status) {
+            this.toastr.success(data.message);
+            localStorage.setItem('jwtToken', data.accessToken);
+            localStorage.setItem('username', data.data.first_name + " " + data.data.last_name);
+            localStorage.setItem('userId', data.data.id.toString());
             this.userService.setLoggedInState(true);
-            this.userService.setUserName(data.obj.first_name + " " + data.obj.last_name);
+            this.userService.setUserName(data.data.first_name + " " + data.data.last_name);
             this.router.navigate(['/']);
           } else {
-            this.toastr.success(data.msg);
+            this.toastr.success(data.message);
           }
         });
   }

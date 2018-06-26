@@ -8,7 +8,7 @@
           <b>{{ ticker.abbv }}</b>
         </p>
         <form #addTickerForm="ngForm" class="forms-sample" (ngSubmit)="onSubmitForm(addTickerForm)">
-          <input type="hidden" name="_id" value="{{ ticker._id }}" />
+          <input type="hidden" name="_id" value="{{ ticker.id }}" />
           <div class="row">
             <div class="col-md-6">
               <div class="form-group">

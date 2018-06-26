@@ -21,9 +21,9 @@ export class TickerService {
 
   searchTickers(term: string): Observable<DtoTicker[]> {
     if (!term.trim()) return of([]);
-    return this.httpClient.get<any>(`${API_CONSTANTS.API_FIND_TICKER}/${term}`).
+    return this.httpClient.get<any>(`${API_CONSTANTS.API_FIND_TICKER}/${term}`, { headers: this.serviceModule.httpOptions_loggedIn.headers }).
       pipe(
-        map(res => <DtoTicker[]>res.obj),
+        map(res => <DtoTicker[]>res.dataList),
         tap(_ => this.serviceModule.log('shit')),
         catchError(this.serviceModule.handleError<DtoTicker[]>('searchTickers', []))
       );
@@ -31,7 +31,7 @@ export class TickerService {
 
   loadTickers(): void {
     this.httpClient.get(API_CONSTANTS.API_LOAD_TICKERS,
-      { headers: this.serviceModule.httpOptions_signUp.headers }).subscribe(response => {
+      { headers: this.serviceModule.httpOptions_loggedIn.headers }).subscribe(response => {
         console.log(response);
       },
         err => {
@@ -39,7 +39,7 @@ export class TickerService {
         });
   }
 
-  addTicker(operationHistory: DtoOperationHistory, tickerId: number): Observable<ResponseDto> {
+  addTicker(operationHistory: DtoOperationHistory, tickerId: number): Observable<ResponseDto<DtoOperationHistory>> {
     const body = {
       operationType: 'C',
       tickerId: tickerId,
@@ -51,7 +51,7 @@ export class TickerService {
       totalConverted: operationHistory.totalConverted
     }
     console.log(body);
-    return this.httpClient.post<ResponseDto>(API_CONSTANTS.API_ADD_TICKER, body,
+    return this.httpClient.post<ResponseDto<DtoOperationHistory>>(API_CONSTANTS.API_ADD_TICKER, body,
       { headers: this.serviceModule.httpOptions_loggedIn.headers });
   }
 

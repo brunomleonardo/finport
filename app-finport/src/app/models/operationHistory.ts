@@ -1,4 +1,5 @@
 export class DtoOperationHistory {
+    id?: number;
     tickerId: number;
     userId: number;
     buyPrice: number;

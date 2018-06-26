@@ -1,5 +1,6 @@
 
 export class DtoUser {
+    id?: number;
     createdOn?: Date;
     createdBy?: String;
     modifiedOn?: Date;

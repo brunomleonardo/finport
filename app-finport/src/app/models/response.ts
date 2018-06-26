@@ -1,6 +1,7 @@
-export class ResponseDto {
-    success: Boolean;
-    msg: string;
-    access_token: string;
-    obj?: any;
+export class ResponseDto<T> {
+    status: Boolean;
+    message: string;
+    accessToken: string;
+    data?: T;
+    dataList?: T[];
 }

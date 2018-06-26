@@ -7,11 +7,11 @@ import { Router } from '@angular/router';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  constructor(private router: Router) {}
+  constructor(private router: Router) { }
   ngOnInit() {
-    if (localStorage.getItem('jwtToken') == null) {
-      this.router.navigate(['/signin']);
-    }
+    // if (localStorage.getItem('jwtToken') == null) {
+    //   this.router.navigate(['/signin']);
+    // }
   }
   title = 'app';
 }

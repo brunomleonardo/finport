@@ -43,7 +43,11 @@ import { Route, Router } from '@angular/router';
     AppRoutingModule,
     HttpClientModule,
     InfiniteScrollModule,
-    ToastrModule.forRoot(),
+    ToastrModule.forRoot({
+      timeOut: 3000,
+      positionClass: 'toast-center-center',
+      preventDuplicates: true,
+    }),
     LocalStorageModule.withConfig({
       prefix: 'finport',
       storageType: 'localStorage'

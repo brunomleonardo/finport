@@ -1,6 +1,6 @@
 
 export class DtoTicker {
-    _id: number;
+    id?: number;
     abbv: string;
     company: string;
     current_price: number;

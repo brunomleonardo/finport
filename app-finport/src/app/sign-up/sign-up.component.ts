@@ -52,18 +52,19 @@ export class SignUpComponent implements OnInit {
 
   onSubmitForm(form: NgForm): void {
     this.userService.registerUser(form.value)
-      .subscribe((data: ResponseDto) => {
-        if (data.success == true) {
+      .subscribe((data: ResponseDto<DtoUser>) => {
+        console.log(data);
+        if (data.status == true) {
           this.resetForm(form);
-          this.toastr.success(data.msg);
-          localStorage.setItem('jwtToken', data.access_token);
-          localStorage.setItem('username', data.obj.first_name + " " + data.obj.last_name);
-          localStorage.setItem('userId', data.obj._id);
+          this.toastr.success(data.message);
+          localStorage.setItem('jwtToken', data.accessToken);
+          localStorage.setItem('username', data.data.first_name + " " + data.data.last_name);
+          localStorage.setItem('userId', data.data.id.toString());
           this.userService.setLoggedInState(true);
-          this.userService.setUserName(data.obj.first_name + " " + data.obj.last_name);
+          this.userService.setUserName(data.data.first_name + " " + data.data.last_name);
           this.router.navigate(['/']);
         } else {
-          this.toastr.error(data.msg);
+          this.toastr.error(data.message);
         }
       });
   }

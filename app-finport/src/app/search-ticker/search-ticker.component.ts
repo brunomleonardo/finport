@@ -39,6 +39,7 @@ export class SearchTickerComponent implements OnInit {
   setTicker(ticker: DtoTicker) {
     this.ticker = ticker;
     this.searchTerms = new Subject<string>();
+    this.tickers$ = new Observable<DtoTicker[]>();
   }
 
   onScroll(): void {
