@@ -7,7 +7,7 @@ import { SignUpComponent } from './sign-up/sign-up.component';
 import { SignInComponent } from './sign-in/sign-in.component';
 
 const routes = [
-  { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
+  { path: '', redirectTo: '/', pathMatch: 'full' },
   { path: 'newticker', component: SearchTickerComponent },
   { path: 'dashboard', component: DashboardComponent },
   { path: 'news', component: NewsComponent },
