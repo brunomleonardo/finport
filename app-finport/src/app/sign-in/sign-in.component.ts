@@ -6,6 +6,8 @@ import { Router } from '@angular/router';
 import { ResponseDto } from '../models/response';
 import { ToastrService } from 'ngx-toastr';
 import { DtoUser } from '../models/user';
+import { LoaderService } from '../services/loader.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-sign-in',
@@ -22,7 +24,8 @@ export class SignInComponent implements OnInit {
   constructor(
     private userService: UserService,
     private toastr: ToastrService,
-    private router: Router
+    private router: Router,
+    private loaderService: LoaderService
   ) { }
 
   ngOnInit() {
@@ -30,10 +33,11 @@ export class SignInComponent implements OnInit {
 
   onSubmitForm(form: NgForm) {
     console.log(localStorage);
+    this.loaderService.setLoaderVisibility(true);
     this.userService.loginUser(form.value.username, form.value.password)
       .subscribe(
         (data: ResponseDto<DtoUser>) => {
-          console.log(data);
+          this.loaderService.setLoaderVisibility(false);
           if (data.status) {
             this.toastr.success(data.message);
             localStorage.setItem('jwtToken', data.accessToken);
@@ -41,8 +45,11 @@ export class SignInComponent implements OnInit {
             localStorage.setItem('userId', data.data.id.toString());
             this.userService.setLoggedInState(true);
             this.userService.setUserName(data.data.first_name + " " + data.data.last_name);
-            this.router.navigate(['/']);
+            this.router.navigate(['/dashboard']);
+            this.userService.setLoggedInState(true);
           } else {
+            this.loaderService.setLoaderVisibility(false);
+            this.userService.setLoggedInState(false);
             this.toastr.success(data.message);
           }
         });

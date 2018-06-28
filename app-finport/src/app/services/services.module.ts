@@ -45,4 +45,8 @@ export class ServicesModule {
     };
   };
 
+  getUserId(): number {
+    return parseInt(localStorage.getItem('useId'));
+  }
+
 }

@@ -20,7 +20,9 @@ import { FeedCardComponent } from './feed-card/feed-card.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { EmailValidatorComponent } from './custom-validators/email-validator/email-validator.component';
 import { SignInComponent } from './sign-in/sign-in.component';
-import { Route, Router } from '@angular/router';
+// import { MaterialModule } from '@angular/material';
+import { LoadingModule } from 'ngx-loading';
+import { WalletComponent } from './wallet/wallet.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +36,8 @@ import { Route, Router } from '@angular/router';
     FeedCardComponent,
     SignUpComponent,
     EmailValidatorComponent,
-    SignInComponent
+    SignInComponent,
+    WalletComponent
   ],
   imports: [
     BrowserModule,
@@ -51,14 +54,15 @@ import { Route, Router } from '@angular/router';
     LocalStorageModule.withConfig({
       prefix: 'finport',
       storageType: 'localStorage'
-    })
+    }),
+    LoadingModule
   ],
   providers: [
     CookieService],
   // { provide: 'LOCALSTORAGE', useFactory: getLocalStorage }],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }
 export function getLocalStorage() {
   return (typeof window !== "undefined") ? window.localStorage : null;
 }
