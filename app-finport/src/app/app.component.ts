@@ -24,12 +24,13 @@ export class AppComponent {
     private userService: UserService) {
   }
 
+  // tslint:disable-next-line:use-life-cycle-interface
   ngOnInit() {
     this.isLoggedIn = localStorage.getItem('jwtToken') != null;
     if (this.isLoggedIn) {
       this.router.navigate(['/dashboard']);
     } else {
-      this.router.navigate(['/']);
+      this.router.navigate(['/init']);
     }
     this.loaderService.loaderValue$.subscribe((value) => this.setLoaderVisibility(value));
     this.userService.loggedIn$.subscribe((value) => this.setLoggedInValue(value));
@@ -39,6 +40,10 @@ export class AppComponent {
   }
   setLoggedInValue(value: boolean): void {
     this.loading = value;
+  }
+
+  toggleShow(): void {
+    this.showFormSignIn = !this.showFormSignIn;
   }
 
 }

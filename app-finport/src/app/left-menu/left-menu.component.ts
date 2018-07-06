@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DtoUser } from '../models/user';
-import { TickerService } from '../services/ticker.service';
+import { ProductService } from '../services/product.service';
 import { Router } from '@angular/router';
 import { UserService } from '../services/user.service';
 import { Observable } from 'rxjs';
@@ -19,7 +19,7 @@ export class LeftMenuComponent implements OnInit {
   userName: String;
 
   constructor(
-    private tickerService: TickerService,
+    private ProductService: ProductService,
     private userService: UserService,
     private router: Router) { }
 
@@ -32,6 +32,7 @@ export class LeftMenuComponent implements OnInit {
 
   setValueState(state: boolean) {
     this.loggedIn = state;
+    console.log(state);
   }
 
   setUserName(name: String) {
@@ -39,11 +40,12 @@ export class LeftMenuComponent implements OnInit {
   }
 
   loadTickers(): void {
-    this.tickerService.loadTickers();
+    this.ProductService.loadTickers();
   }
 
   logout(): void {
     localStorage.clear();
+    this.loggedIn = false;
     this.router.navigate(['/']);
   }
 

@@ -18,7 +18,7 @@ import { Router } from '@angular/router';
 export class SignUpComponent implements OnInit {
 
   user: DtoUser = new DtoUser();
-  emailPattern: "^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$";
+  emailPattern: '^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$';
 
   constructor(
     private userService: UserService,
@@ -38,15 +38,15 @@ export class SignUpComponent implements OnInit {
   }
 
   resetForm(form?: NgForm): void {
-    if (form != null)
-      form.reset();
-    this.user = {
-      username: '',
-      password: '',
-      email: '',
-      first_name: '',
-      last_name: '',
-      password_confirmation: ''
+    if (form != null) {
+      this.user = {
+        username: '',
+        password: '',
+        email: '',
+        first_name: '',
+        last_name: '',
+        password_confirmation: ''
+      };
     }
   }
 
@@ -54,15 +54,15 @@ export class SignUpComponent implements OnInit {
     this.userService.registerUser(form.value)
       .subscribe((data: ResponseDto<DtoUser>) => {
         console.log(data);
-        if (data.status == true) {
+        if (data.status = true) {
           this.resetForm(form);
           this.toastr.success(data.message);
           localStorage.setItem('jwtToken', data.accessToken);
-          localStorage.setItem('username', data.data.first_name + " " + data.data.last_name);
+          localStorage.setItem('username', data.data.first_name + '' + data.data.last_name);
           localStorage.setItem('userId', data.data.id.toString());
           this.userService.setLoggedInState(true);
-          this.userService.setUserName(data.data.first_name + " " + data.data.last_name);
-          this.router.navigate(['/']);
+          this.userService.setUserName(data.data.first_name + '' + data.data.last_name);
+          this.router.navigate(['/dashboard']);
         } else {
           this.toastr.error(data.message);
         }

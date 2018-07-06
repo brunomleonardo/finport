@@ -18,7 +18,7 @@ export class ServicesModule {
       {
         'Access-Control-Allow-Origin': '*',
         'Access-Control-Allow-Headers': 'Content-Type, Authorization',
-        'Authorization': "Bearer " + localStorage.getItem('jwtToken')
+        'Authorization': 'Bearer ' + localStorage.getItem('jwtToken')
       }
     )
   };
@@ -34,7 +34,7 @@ export class ServicesModule {
 
   log(message: string) {
     console.log('Log fun:' + message);
-  };
+  }
 
   handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
@@ -43,10 +43,11 @@ export class ServicesModule {
       this.log(`${operation} failed: ${error.message}`);
       return of(result as T);
     };
-  };
+  }
 
   getUserId(): number {
-    return parseInt(localStorage.getItem('useId'));
+    // tslint:disable-next-line:radix
+    return parseInt(localStorage.getItem('userId'));
   }
 
 }

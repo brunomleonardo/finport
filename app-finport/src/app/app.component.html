@@ -8,10 +8,10 @@
           <div class="panel-heading">
             <div class="row padding-t15">
               <div class="col-md-6">
-                <a href="#" [ngClass]="{'active': !showFormSignIn}" (click)="toggleShow()" id="login-form-link">Sign-In</a>
+                <button [ngClass]="{'active': !showFormSignIn}" (click)="toggleShow()" id="login-form-link">Sign-In</button>
               </div>
               <div class="col-md-6">
-                <a href="#" [ngClass]="{'active': showFormSignIn}" id="register-form-link" (click)="toggleShow()">Sign-Up</a>
+                <button href="" [ngClass]="{'active': showFormSignIn}" id="register-form-link" (click)="toggleShow()">Sign-Up</button>
               </div>
             </div>
             <hr>

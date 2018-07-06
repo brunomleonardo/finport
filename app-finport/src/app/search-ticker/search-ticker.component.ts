@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Observable, Subject } from 'rxjs';
+import { Observable, Subject, BehaviorSubject } from 'rxjs';
 import {
   debounceTime, distinctUntilChanged, switchMap
 } from 'rxjs/operators';
 
-import { DtoTicker } from '../models/ticker';
-import { TickerService } from '../services/ticker.service';
+import { DtoProduct } from '../models/product';
+import { ProductService } from '../services/product.service';
+import { ResponseDto } from '../models/response';
 
 @Component({
   selector: 'app-search-ticker',
@@ -15,35 +16,39 @@ import { TickerService } from '../services/ticker.service';
 })
 export class SearchTickerComponent implements OnInit {
 
-  tickers$: Observable<DtoTicker[]>;
+  tickers$: Observable<ResponseDto<DtoProduct[]>>;
+  tickers: DtoProduct[];
   private searchTerms = new Subject<string>();
-  ticker: DtoTicker;
+  ticker: DtoProduct;
   offset: Number;
 
   constructor(
-    private tickerService: TickerService
+    private ProductService: ProductService
   ) { }
 
   ngOnInit() {
     this.tickers$ = this.searchTerms.pipe(
       debounceTime(300),
       distinctUntilChanged(),
-      switchMap((term: string) => this.tickerService.searchTickers(term))
+      switchMap((term: string) => this.ProductService.searchTickers(term))
     );
+    this.tickers$.subscribe((res: ResponseDto<DtoProduct[]>) => {
+      this.tickers = res.data;
+    });
   }
 
   search(term: string): void {
     this.searchTerms.next(term);
   }
 
-  setTicker(ticker: DtoTicker) {
+  setTicker(ticker: DtoProduct) {
     this.ticker = ticker;
     this.searchTerms = new Subject<string>();
-    this.tickers$ = new Observable<DtoTicker[]>();
+    this.tickers$ = new Observable<ResponseDto<DtoProduct[]>>();
   }
 
   onScroll(): void {
-    console.log("scrolled!!");
+    // console.log("scrolled!!");
   }
 
 }

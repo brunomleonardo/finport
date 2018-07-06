@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { UserService } from '../services/user.service';
 import { HttpErrorResponse } from '@angular/common/http';
-import { Router } from '@angular/router';
+import { Router, ActivatedRouteSnapshot } from '@angular/router';
 import { ResponseDto } from '../models/response';
 import { ToastrService } from 'ngx-toastr';
 import { DtoUser } from '../models/user';
@@ -18,7 +18,7 @@ export class SignInComponent implements OnInit {
 
   username: String = 'bleonardo';
   password: String = '123';
-  isLoginError: boolean = false;
+  isLoginError = false;
   message: String = '';
 
   constructor(
@@ -37,21 +37,22 @@ export class SignInComponent implements OnInit {
     this.userService.loginUser(form.value.username, form.value.password)
       .subscribe(
         (data: ResponseDto<DtoUser>) => {
-          this.loaderService.setLoaderVisibility(false);
           if (data.status) {
-            this.toastr.success(data.message);
+            // session variables
             localStorage.setItem('jwtToken', data.accessToken);
-            localStorage.setItem('username', data.data.first_name + " " + data.data.last_name);
+            localStorage.setItem('username', data.data.first_name + '' + data.data.last_name);
             localStorage.setItem('userId', data.data.id.toString());
+            // update view data and session state
+            this.userService.setUserName(data.data.first_name + '' + data.data.last_name);
             this.userService.setLoggedInState(true);
-            this.userService.setUserName(data.data.first_name + " " + data.data.last_name);
-            this.router.navigate(['/dashboard']);
-            this.userService.setLoggedInState(true);
-          } else {
-            this.loaderService.setLoaderVisibility(false);
-            this.userService.setLoggedInState(false);
+            // show popup and navigate to main page
             this.toastr.success(data.message);
+            this.router.navigate(['/dashboard']);
+          } else {
+            this.userService.setLoggedInState(false);
+            this.toastr.error(data.message);
           }
+          this.loaderService.setLoaderVisibility(false);
         });
   }
 }

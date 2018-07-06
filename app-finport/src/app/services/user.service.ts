@@ -37,17 +37,12 @@ export class UserService {
       );
   }
 
-  loginUser(username: String, password: String): Observable<any> {
+  loginUser(username: String, password: String): Observable<ResponseDto<DtoUser>> {
     const body: any = {
       username: username,
-      password: password
-    }
-    return this.httpClient.post(API_CONSTANTS.API_SIGN_IN, body);
-    // .pipe(
-    //   // map(res => <Response>res),
-    //   tap(_ => this.serviceModule.log('Logging on login user')),
-    //   catchError(this.serviceModule.handleError<Response>('loginUser', null))
-    // );
+      password: password,
+    };
+    return this.httpClient.post<ResponseDto<DtoUser>>(API_CONSTANTS.API_SIGN_IN, body);
   }
 
   getLoggedInState(): Observable<boolean> {

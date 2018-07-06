@@ -1,5 +1,5 @@
-import { DtoWalletDeposits } from "./walletDeposits";
-import { DtoCurrencies } from "./currencies";
+import { DtoWalletDeposits } from './walletDeposits';
+import { DtoCurrencies } from './currencies';
 
 export class DtoWallet {
     id?: number;
@@ -8,4 +8,5 @@ export class DtoWallet {
     currency: DtoCurrencies;
     userId: number;
     deposits: DtoWalletDeposits[];
+    totalAccount?: number;
 }

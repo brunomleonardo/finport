@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { DtoTicker } from '../models/ticker';
-import { TickerService } from '../services/ticker.service';
+import { DtoProduct } from '../models/product';
+import { ProductService } from '../services/product.service';
 import { NgForm } from '@angular/forms';
 import { DtoOperationHistory } from '../models/operationHistory';
 import { ResponseDto } from '../models/response';
@@ -15,12 +15,12 @@ import { Router } from '@angular/router';
 export class AddNewTickerComponent implements OnInit {
 
   constructor(
-    private tickerService: TickerService,
+    private ProductService: ProductService,
     private router: Router,
     private toastr: ToastrService) { }
 
   @Input()
-  ticker: DtoTicker;
+  ticker: DtoProduct;
 
   operationHistory: DtoOperationHistory;
 
@@ -30,7 +30,7 @@ export class AddNewTickerComponent implements OnInit {
 
   onSubmitForm(form: NgForm) {
     console.log(form.value);
-    this.tickerService.addTicker(form.value, this.ticker.id)
+    this.ProductService.addTicker(form.value, this.ticker.id)
       .subscribe(
         (data: ResponseDto<any>) => {
           if (data.status) {

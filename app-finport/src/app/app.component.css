@@ -32,16 +32,24 @@
   border-bottom: 1px solid #00415d4d;
   text-align: center;
 }
-.panel-login>.panel-heading a{
-	text-decoration: none;
+
+.panel-login>.panel-heading button:hover {
+  cursor:pointer;
+}
+
+.panel-login>.panel-heading button{
+  text-decoration: none;
+  width: 100%;
 	color: #666;
 	font-weight: bold;
-	font-size: 15px;
+  font-size: 15px;
+  background-color:transparent;
+  border:none;
 	-webkit-transition: all 0.1s linear;
 	-moz-transition: all 0.1s linear;
 	transition: all 0.1s linear;
 }
-.panel-login>.panel-heading a.active{
+.panel-login>.panel-heading button.active{
 	color: #029f5b;
 	font-size: 18px;
 }

@@ -1,5 +1,4 @@
-export class DtoWalletDeposits{
-    id?:number;
+export class DtoWalletDeposits {
+    id?: number;
     amount: number;
-    walletId: number;
 }
