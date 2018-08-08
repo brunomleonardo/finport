@@ -1,5 +1,9 @@
-export class DtoCurrencies {
-    id?: number;
-    symbol: string;
-    designation: string;
+export class CurrenciesDTO {
+    CurrencyId: number;
+    Symbol: string;
+    Designation: string;
+    Name: string;
+    constructor(currencyId: number){
+        this.CurrencyId = currencyId;
+    }
 }

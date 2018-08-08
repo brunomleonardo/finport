@@ -1,17 +1,20 @@
+import { WalletsDTO } from "./wallet";
 
-export class DtoUser {
-    id?: number;
-    createdOn?: Date;
-    createdBy?: String;
-    modifiedOn?: Date;
-    modifiedBy?: String;
-    deleted?: Boolean;
-    email: String;
-    first_name: String;
-    last_name: String;
-    username: String;
-    password: String;
-    password_confirmation: String;
+export class UsersDTO {
+    UserId: number;
+    Username: string;
+    Email: string;
+    FirstName: string;
+    LastName: string;
+    Password: string;
+    PasswordConfirmation?: string
+    Wallet: WalletsDTO;
+    UserAmount: number;
+    UserWalletSymbol: string;
+    UserWalletDesignation: string;
+    // UserExchangeTaxes: IEnumerable<UserExchangeTaxesDTO>;
+    // UserOperationHistories: IEnumerable<UserOperationHistoriesDTO>;
+    constructor(){
+        this.Wallet = new WalletsDTO(0);
+    }
 }
-
-

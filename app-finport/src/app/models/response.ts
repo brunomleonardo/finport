@@ -1,7 +1,7 @@
 export class ResponseDto<T> {
-    status: Boolean;
-    message: string;
-    accessToken: string;
-    data?: T;
-    dataList?: T[];
+    Status: Boolean;
+    Message: string;
+    AccessToken: string;
+    Data?: T;
+    DataList?: T[];
 }

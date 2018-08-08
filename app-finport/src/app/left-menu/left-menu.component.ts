@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { DtoUser } from '../models/user';
 import { ProductService } from '../services/product.service';
 import { Router } from '@angular/router';
 import { UserService } from '../services/user.service';

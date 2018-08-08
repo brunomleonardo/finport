@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { DtoWallet } from '../models/wallet';
+import { WalletsDTO } from '../models/wallet';
 import { WalletService } from '../services/wallet.service';
 import { ResponseDto } from '../models/response';
-import { DtoUser } from '../models/user';
 import { DtoOperationHistory } from '../models/operationHistory';
 import { Observable } from 'rxjs';
 import { OperationsService } from '../services/operations.service';
@@ -14,7 +13,7 @@ import { OperationsService } from '../services/operations.service';
 })
 export class WalletComponent implements OnInit {
 
-  myWallet: DtoWallet;
+  myWallet: WalletsDTO;
   totalFees: number = 0;
   totalZeroLoss: number;
   userOperations: DtoOperationHistory[];
@@ -26,13 +25,13 @@ export class WalletComponent implements OnInit {
 
   ngOnInit() {
     this.walletService.getUserWallet().subscribe(
-      (data: ResponseDto<DtoWallet>) => {
-        this.setWallet(data.data);
+      (data: ResponseDto<WalletsDTO>) => {
+        this.setWallet(data.Data);
       });
     this.walletService.userWallet$.subscribe((value) => this.setWallet(value));
     this.operationsService.getUserOperations().subscribe(
       (res: ResponseDto<DtoOperationHistory[]>) => {
-        this.userOperations = res.data;
+        this.userOperations = res.Data;
         if (this.userOperations && this.userOperations.length > 0) {
           this.userOperations.forEach(item => {
             this.totalFees += item.feeValue;
@@ -42,15 +41,15 @@ export class WalletComponent implements OnInit {
     );
   }
 
-  setWallet(value: DtoWallet): void {
+  setWallet(value: WalletsDTO): void {
     this.myWallet = value;
     let total = 0;
-    if (this.myWallet && this.myWallet.deposits) {
-      this.myWallet.deposits.forEach(dep => {
-        total += dep.amount;
+    if (this.myWallet && this.myWallet.WalletDeposits) {
+      this.myWallet.WalletDeposits.forEach(dep => {
+        total += dep.Amount;
       });
-      this.myWallet.totalAccount = this.myWallet.amount + total;
-      this.totalZeroLoss = this.myWallet.totalAccount + (2 * this.totalFees); // + anual fees
+      //this.myWallet.totalAccount = this.myWallet.amount + total;
+      //this.totalZeroLoss = this.myWallet.totalAccount + (2 * this.totalFees); // + anual fees
     }
   }
 }

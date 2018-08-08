@@ -5,7 +5,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Router, ActivatedRouteSnapshot } from '@angular/router';
 import { ResponseDto } from '../models/response';
 import { ToastrService } from 'ngx-toastr';
-import { DtoUser } from '../models/user';
+import { UsersDTO } from '../models/user';
 import { LoaderService } from '../services/loader.service';
 import { Observable } from 'rxjs';
 
@@ -36,21 +36,21 @@ export class SignInComponent implements OnInit {
     this.loaderService.setLoaderVisibility(true);
     this.userService.loginUser(form.value.username, form.value.password)
       .subscribe(
-        (data: ResponseDto<DtoUser>) => {
-          if (data.status) {
+        (data: ResponseDto<UsersDTO>) => {
+          if (data.Status) {
             // session variables
-            localStorage.setItem('jwtToken', data.accessToken);
-            localStorage.setItem('username', data.data.first_name + '' + data.data.last_name);
-            localStorage.setItem('userId', data.data.id.toString());
+            localStorage.setItem('jwtToken', data.AccessToken);
+            localStorage.setItem('username', data.Data.FirstName + '' + data.Data.LastName);
+            localStorage.setItem('userId', data.Data.UserId.toString());
             // update view data and session state
-            this.userService.setUserName(data.data.first_name + '' + data.data.last_name);
+            this.userService.setUserName(data.Data.FirstName + '' + data.Data.LastName);
             this.userService.setLoggedInState(true);
             // show popup and navigate to main page
-            this.toastr.success(data.message);
+            this.toastr.success(data.Message);
             this.router.navigate(['/dashboard']);
           } else {
             this.userService.setLoggedInState(false);
-            this.toastr.error(data.message);
+            this.toastr.error(data.Message);
           }
           this.loaderService.setLoaderVisibility(false);
         });

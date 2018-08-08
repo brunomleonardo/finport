@@ -1,60 +1,108 @@
 <div class="row">
   <div class="col-12">
-    <div class="card">
-      <div class="card-body">
-        <h4 class="card-title">User Registration</h4>
-        <p class="card-description">
-          <b>Details</b>
-        </p>
-        <form #userRegistrationForm="ngForm" (ngSubmit)="onSubmitForm(userRegistrationForm)">
+    <form #userRegistrationForm="ngForm" (ngSubmit)="onSubmitForm(userRegistrationForm)">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title">User Registration</h4>
+          <p class="card-description">
+            <b>Details</b>
+          </p>
+
           <div class="row">
             <div class="col-md-6">
               <div class="form-group">
                 <label data-error="Required field!">UserName</label>
-                <input class="form-control" type="text" name="username" #UserName="ngModel" [(ngModel)]="user.username" required>
+                <input class="form-control" type="text" name="Username" #UserName="ngModel" [(ngModel)]="user.Username" required>
               </div>
             </div>
             <div class="col-md-6">
               <div class="form-group">
                 <label [attr.data-error]="Password.errors!=null?(Password.errors.required?'Required field!':'Minimum 3 characters needed'):''">Password</label>
-                <input type="password" class="form-control" name="password" #Password="ngModel" [(ngModel)]="user.password" required minlength="3">
+                <input type="password" class="form-control" name="Password" #Password="ngModel" [(ngModel)]="user.Password" required minlength="3">
               </div>
             </div>
           </div>
           <div class="row">
             <div class="col-md-6">
               <div class="form-group">
-                <label data-error="Invalid email!">Email</label>
-                <input class="form-control" type="text" name="email" #Email="ngModel" [(ngModel)]="user.email" [pattern]="emailPattern">
+                <!-- <mat-form-field class="example-full-width">
+                  <input matInput placeholder="Email" [formControl]="userRegistrationForm" [errorStateMatcher]="matcher">
+                  <mat-hint>Errors appear instantly!</mat-hint>
+                  <mat-error *ngIf="userRegistrationForm.hasError('user.Email') && !userRegistrationForm.hasError('required')">
+                    Please enter a valid email address
+                  </mat-error>
+                  <mat-error *ngIf="userRegistrationForm.hasError('required')">
+                    Email is
+                    <strong>required</strong>
+                  </mat-error>
+                </mat-form-field> -->
+                <mat-form-field class="example-full-width">
+                    <input matInput placeholder="Favorite food" value="Sushi">
+                  </mat-form-field>
+                
+                  <mat-form-field class="example-full-width">
+                    <textarea matInput placeholder="Leave a comment"></textarea>
+                  </mat-form-field>
+                <!-- <label data-error="Invalid email!">Email</label>
+                <input class="form-control" type="text" name="Email" #Email="ngModel" [(ngModel)]="user.Email" [pattern]="emailPattern" required> -->
               </div>
             </div>
             <div class="col-md-6">
-                <div class="form-group">
-                  <label 
-                  [attr.data-error]="PasswordConfirmation.errors != null 
+              <div class="form-group">
+                <label [attr.data-error]="PasswordConfirmation.errors != null 
                     ? (PasswordConfirmation.errors.required 
                               ? 'Required field!' : (Password != PasswordConfirmation ? 'Password doesnt match' : '')):''">Password Confirmation</label>
-                  <input type="password" class="form-control" name="password_confirmation" #PasswordConfirmation="ngModel" [(ngModel)]="user.password_confirmation" required minlength="3">
-                </div>
+                <input type="password" class="form-control" name="PasswordConfirmation" #PasswordConfirmation="ngModel" [(ngModel)]="user.PasswordConfirmation"
+                  required minlength="3">
               </div>
+            </div>
           </div>
           <div class="row">
             <div class="col-md-6">
               <div class="form-group">
                 <label>First Name</label>
-                <input class="form-control" type="text" name="first_name" #FirstName="ngModel" [(ngModel)]="user.first_name">
+                <input class="form-control" type="text" name="FirstName" #FirstName="ngModel" [(ngModel)]="user.FirstName">
               </div>
             </div>
             <div class="col-md-6">
               <div class="form-group">
                 <label>Last Name</label>
-                <input class="form-control" type="text" name="last_name" #LastName="ngModel" [(ngModel)]="user.last_name">
+                <input class="form-control" type="text" name="LastName" #LastName="ngModel" [(ngModel)]="user.LastName">
               </div>
             </div>
           </div>
-          <button [disabled]="!userRegistrationForm.valid" class="btn btn-success mr-2" type="submit">Submit</button>
-        </form>
+
+        </div>
+        <div class="card-body">
+          <h4 class="card-title">Wallet</h4>
+          <p class="card-description">
+            <b>Details</b>
+          </p>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Amount</label>
+                <input class="form-control" type="number" name="walletAmount" #inputWallet (change)="bindToWallet(inputWallet.value)" required>
+              </div>
+              {{ walletAmountInput.valid }}
+              <span [hidden]="walletAmountInput.valid" class="alert alert-danger" style="width:100%">
+                Wallet amount is required.
+              </span>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Currency</label>
+                <select class="form-control" #selectCurrency (change)="setCurrencyId(selectCurrency.value)">
+                  <option value="" disabled selected>Select Currency</option>
+                  <option *ngFor="let curr of currencies" [value]="curr.CurrencyId">{{ curr.Designation }}</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
+      <button [disabled]="!userRegistrationForm.form.valid" class="btn btn-success mr-2" type="submit">Submit</button>
+      <pre>{{ userRegistrationForm.value | json }}</pre>
+    </form>
   </div>
 </div>

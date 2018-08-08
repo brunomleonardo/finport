@@ -33,12 +33,12 @@ export class AddNewTickerComponent implements OnInit {
     this.ProductService.addTicker(form.value, this.ticker.id)
       .subscribe(
         (data: ResponseDto<any>) => {
-          if (data.status) {
-            this.toastr.success(data.message, "Operation", {
+          if (data.Status) {
+            this.toastr.success(data.Message, "Operation", {
               timeOut: 1500
             });
           } else {
-            this.toastr.error(data.message, "Operation", {
+            this.toastr.error(data.Message, "Operation", {
               timeOut: 1500,
             });
           }

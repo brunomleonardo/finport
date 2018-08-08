@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { DtoUser } from '../models/user';
+import { UsersDTO } from '../models/user';
 import { HttpClient } from '@angular/common/http';
 import { Observable, Subject, BehaviorSubject } from 'rxjs';
 import { catchError, tap, map } from 'rxjs/operators';
@@ -21,15 +21,8 @@ export class UserService {
   ) { }
 
 
-  registerUser(user: DtoUser): Observable<any> {
-    const body: DtoUser = {
-      username: user.username,
-      password: user.password,
-      email: user.email,
-      first_name: user.first_name,
-      last_name: user.last_name,
-      password_confirmation: user.password_confirmation
-    };
+  registerUser(user: UsersDTO): Observable<any> {
+    const body: UsersDTO = user;
     return this.httpClient.post(API_CONSTANTS.API_SIGN_UP, body, { headers: this.serviceModule.httpOptions_signUp.headers })
       .pipe(
         tap(_ => this.serviceModule.log('Logging on register user')),
@@ -37,12 +30,12 @@ export class UserService {
       );
   }
 
-  loginUser(username: String, password: String): Observable<ResponseDto<DtoUser>> {
+  loginUser(username: String, password: String): Observable<ResponseDto<UsersDTO>> {
     const body: any = {
       username: username,
       password: password,
     };
-    return this.httpClient.post<ResponseDto<DtoUser>>(API_CONSTANTS.API_SIGN_IN, body);
+    return this.httpClient.post<ResponseDto<UsersDTO>>(API_CONSTANTS.API_SIGN_IN, body);
   }
 
   getLoggedInState(): Observable<boolean> {

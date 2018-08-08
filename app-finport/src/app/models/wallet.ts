@@ -1,12 +1,19 @@
-import { DtoWalletDeposits } from './walletDeposits';
-import { DtoCurrencies } from './currencies';
+import { WalletDepositsDTO } from './walletDeposits';
+import { CurrenciesDTO } from './currencies';
 
-export class DtoWallet {
-    id?: number;
-    amount: number;
-    currencyId: number;
-    currency: DtoCurrencies;
-    userId: number;
-    deposits: DtoWalletDeposits[];
-    totalAccount?: number;
+export class WalletsDTO {
+    Amount: number;
+    CurrencySymbol: string;
+    CurrencyDesignation: string;
+    CurrencyName: string;
+    Currency: CurrenciesDTO;
+    UsersUserId: number;
+    UsersUsername: string;
+    UsersFirstName: string;
+    UsersLastName: string;
+    WalletDeposits: WalletDepositsDTO[];
+    constructor(amount: number){
+        this.Amount = amount;
+        this.Currency = new CurrenciesDTO(0);
+    }
 }

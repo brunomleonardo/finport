@@ -33,7 +33,7 @@ export class SearchTickerComponent implements OnInit {
       switchMap((term: string) => this.ProductService.searchTickers(term))
     );
     this.tickers$.subscribe((res: ResponseDto<DtoProduct[]>) => {
-      this.tickers = res.data;
+      this.tickers = res.Data;
     });
   }
 

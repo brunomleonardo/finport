@@ -4,6 +4,7 @@ import { trigger, animate, style, transition, state } from '@angular/animations'
 import { Observable } from 'rxjs';
 import { LoaderService } from './services/loader.service';
 import { UserService } from './services/user.service';
+import { ServicesModule } from './services/services.module';
 
 @Component({
   selector: 'app-root',
@@ -21,12 +22,17 @@ export class AppComponent {
   constructor(
     private router: Router,
     private loaderService: LoaderService,
+    private serviceModule: ServicesModule,
     private userService: UserService) {
   }
 
   // tslint:disable-next-line:use-life-cycle-interface
   ngOnInit() {
-    this.isLoggedIn = localStorage.getItem('jwtToken') != null;
+    const userId = this.serviceModule.getUserId();
+    if (userId)
+      localStorage.clear();
+
+    this.isLoggedIn = localStorage.getItem('userId') != null;
     if (this.isLoggedIn) {
       this.router.navigate(['/dashboard']);
     } else {
